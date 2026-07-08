@@ -23,3 +23,27 @@ export const updateUser = async (req, res, next) => {
         next(error)
     }
 }
+
+
+export const getAllUsers = async (req, res) => {
+    // console.log("req query -->", req.query);
+    
+    // let query = {age : {$gte: req.query.ageStart, $lte:req.query.ageEnd}}
+
+    // let querytwo = {...req.query}
+
+    // if(req.query.ageStart && req.query.ageEnd){
+
+    // }
+
+    try {
+        let allUsers = await userModel.find().limit(10).skip(2).sort("-age")
+        console.log(allUsers);
+
+        return successResponse(200, true, "users retrieve successfully", allUsers, res)
+        
+    } catch (error) {
+        return errorResponse(400, false, error.message, res)
+        
+    }
+}

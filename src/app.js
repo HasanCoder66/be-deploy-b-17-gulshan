@@ -15,6 +15,9 @@ import userRoute from './routes/userRoute.js'
 export const app = express()
 app.use(express.json())
 
+
+app.use("/",res.send("hello from the server!"))
+
 app.use("/api/auth", authRoute)
 app.use("/api/user", userRoute)
 
