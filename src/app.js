@@ -16,7 +16,7 @@ export const app = express()
 app.use(express.json())
 
 
-app.use("/",(req, res) => res.send("hello from the server!"))
+app.use("/server",(req, res) => res.send("hello from the server!"))
 
 app.use("/api/auth", authRoute)
 app.use("/api/user", userRoute)
