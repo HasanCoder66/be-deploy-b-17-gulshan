@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken"
+
 import User from '../models/UserModel.js'
 export const updateUser = async (req, res, next) => {
     try {

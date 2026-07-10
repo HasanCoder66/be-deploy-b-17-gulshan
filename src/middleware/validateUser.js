@@ -1,3 +1,5 @@
+import jwt from "jsonwebtoken"
+
 export const validateUser = (req, res, next) =>{
     try {
         let token = req.headers.authorization;
@@ -13,6 +15,6 @@ export const validateUser = (req, res, next) =>{
         req.user = decode;
         next()
     } catch (error) {
-        
+        next(error)
     }
 }
