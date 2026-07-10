@@ -8,6 +8,11 @@ const signup = async (req, res, next) => {
     try {
         const {email, password, userName} = req.body;
 
+        const file = req.file;
+        console.log(file);
+
+        if(!file) throw new Error("Image is required")
+
         if(!email || !password || !userName ) throw new Error("all fields are required", 400)
 
         const existingUser = await User.findOne({email})
@@ -22,9 +27,24 @@ const signup = async (req, res, next) => {
 
         let returnSendEmailOTPHandler = await sendEmailOTP(email, otp)
 
-        console.log(returnSendEmailOTPHandler);
+        // console.log(returnSendEmailOTPHandler);
 
-        const user = new User({...req.body, password : hashedPassword, otp });
+        const cloudResponse = await cloudinary.uploader.upload(
+            file.path,
+            {
+                folder: "users"
+            }
+        )
+
+        console.log("cloud response",cloudResponse);
+
+        const user = new User({
+            ...req.body, 
+            password : hashedPassword,
+            otp, 
+            profileImage: cloudResponse.secure_url 
+            });
+            
         await user.save()
 
         return res.status(200).json({
