@@ -7,6 +7,6 @@ const PORT = process.env.PORT  || 6500;
 //     console.log(`server is listenin on PORT ${PORT}`);
 // })
 
-    connectDb()
+   await connectDb()
 
 export default app;
