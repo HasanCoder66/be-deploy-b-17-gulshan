@@ -29,7 +29,8 @@ export const getAllUsers = async (req, res, next) => {
 
 
     try {
-        let allUsers = await userModel.find().limit(10).skip(2).sort("-age")
+        let allUsers = await User.find()
+        // .limit(10).skip(2).sort("-age")
         // console.log(allUsers);
 
         return res.status(200).json({
